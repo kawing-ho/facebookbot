@@ -1,0 +1,54 @@
+Hello and welcome to this diary file I made which records the progress of my little project here.
+I may or may not be using profanity in this so user discretion is advised.
+
+===================================================================================
+26/11/17:
+
+> Okay so I didnt really want Facebook to track who I was and why I was running an automated
+  page that would seemingly be posting spam, so to avoid suspicion I created :
+
+- a new email account (ninjamafia@tutamail.com) coutesy of tutanoa.com 
+  That site is super awesome because you don't need a phone number to sign up for it,
+  just another email ! 
+
+- a fake facebook account which also runs a Facebook page which I will not name ;) 
+  Facebook is actually really smart at identifying bots / fake accounts, 
+  I put my name as Beef Burger and they rehected it ;_;
+  instead I looked up a fake name generator (can't believe these things even exist) and used those
+
+===================================================================================
+27/11/17:
+
+> did heavy amounts of research on how to use the Facebook API.
+its actually lowkey annoying, because I want to do it with Python but I also don't want to 
+install any SDK for it
+
+===================================================================================
+28/11/17:
+
+> Python requests library looks fucking amazing because it can send/receive HTTP 
+
+> I might be using Facebook Graph API which means I need to sign up for developer account
+
+===================================================================================
+29/11/17:
+
+> Good job Facebook, also this is why we can't have nice things
+  They somehow managed to detect that my account wasn't doing anything within 24 hours of signing up
+  Maybe that caused it to fail the human test, and they asked me to "upload a profile picture to prove its me" 
+
+> I went "fuck you" and uploaded a piece of chicken and now my fake account is disabled and most likely deleted forever. Fuck.
+
+> SO my plan now is to use my own account to register for Developer ... and run the app from there ?
+
+> I should be fine as long as I don't do anything illegal/stupid right ???? 
+
+
+===================================================================================
+30/11/17
+
+
+===================================================================================
+31/11/17
+
+
