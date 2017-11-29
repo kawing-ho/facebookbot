@@ -2,3 +2,11 @@
 -> figure out API for python 
 
 ID: 1933964396922258
+
+https://graph.facebook.com/1933964396922258 
+
+import requests
+
+r = requests.get("https://graph.facebook.com/1933964396922258")
+r.text
+
