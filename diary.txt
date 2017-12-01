@@ -30,6 +30,9 @@ install any SDK for it
 
 > I might be using Facebook Graph API which means I need to sign up for developer account
 
+> Still kinda confused by the different tokens but I know that obtaining one allows you 
+  to interact with the content as a page / user / the app
+
 ===================================================================================
 29/11/17:
 
@@ -47,8 +50,64 @@ install any SDK for it
 ===================================================================================
 30/11/17
 
+> I'm being lazy, losing my motivation, and I really want to finish as fast as possible.
+  I dont know why I'm not retaining any information at all :( 
+
+> I need to get a long-life page access token for my "App" to use
+> How do I do that ? well 
+
+> I have to prove that I own the page AND the app first ! 
+
+> Ok I managed to get a short-lived token
+  it seems that I need to get a long-lived one so I'll do this : 
+
+
+https://graph.facebook.com/oauth/access_token?
+  client_id={APP_ID}&
+  client_secret={APP_SECRET}&
+  grant_type=fb_exchange_token&
+  fb_exchange_token={EXISTING_ACCESS_TOKEN}
 
 ===================================================================================
-31/11/17
+1/12/17
+
+> Set up page, since I'm admin I should have 
+
+> I really need to finish this by the end of the week so I can do other shit
+
+> OKay so its doable by curl, get request to return info, post request to do posts I'm sure
+  Combine that with python requests and should be able to do some automation
+  Need some system to re-request the code each time tho
+
+> Finally got the page access token ! (never expires)
+
+> Okay so posting works ! 
+  me/feed?message=Hello World
+
+> Lets try and delete it now !!
+  DELETE with /151042402320312_151223835635502 (id)
+
+> Started python script with request.get and it works so far
+
+  Daily Telegraph : 110032161104
+  CNN : 5550296508
+  BBC : 228735667216
+  New York Times : 5281959998
+  The Guardian : 10513336322
+  The Washington Post : 6250307292
+
+
+> Trying to see if I can scrape off their most recent post from feed !
+> And yes we can ! (Just set limit to 1)
+
+curl -i -X GET \
+ "https://graph.facebook.com/v2.11/5550296508/feed?limit=1
+&access_token=EAAHdZB6olyacBAL3HbCZA7ME1PhQselUDz4YhRoORK3XZBMyBorZB3kJxEdJC2O77wNgYnL8Ql6JJ7ZBOvZAakndNudrE8rHFbZBq2JuMVIZABsYVcDsiKnnsck8hFN66iZASsIzGGeRMtKPNLVkfyEd4klHRzOdVH2UYbUH42G8ESKR66xzT0OkbE74TEQL7tEMZD"
+
+===================================================================================
+2/12/17
+
+> Making good progress ! Managed to randomize seed posts, time to fuck around with posting and editing hehehehhehe
+
 
 
