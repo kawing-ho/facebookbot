@@ -7,13 +7,13 @@ I may or may not be using profanity in this so user discretion is advised.
 > Okay so I didnt really want Facebook to track who I was and why I was running an automated
   page that would seemingly be posting spam, so to avoid suspicion I created :
 
-- a new email account (ninjamafia@tutamail.com) coutesy of tutanoa.com 
+- a new email account (ninjamafia@tutamail.com) courtesy of tutanoa.com 
   That site is super awesome because you don't need a phone number to sign up for it,
   just another email ! 
 
 - a fake facebook account which also runs a Facebook page which I will not name ;) 
   Facebook is actually really smart at identifying bots / fake accounts, 
-  I put my name as Beef Burger and they rehected it ;_;
+  I put my name as Beef Burger and they rejected it ;_;
   instead I looked up a fake name generator (can't believe these things even exist) and used those
 
 ===================================================================================
@@ -108,6 +108,53 @@ curl -i -X GET \
 2/12/17
 
 > Making good progress ! Managed to randomize seed posts, time to fuck around with posting and editing hehehehhehe
+> Going to start making the script into a CRON job
+> After that I'll start doing the editing ...
 
+> Started research on crontabs and cronjobs, learnt quite a bit and this site has some good examples !  https://crontab.guru/examples.html
+  Hourly = 0 * * * * * 
 
+> I also learnt about the notify-send thing which is pretty awesome !
+
+> Weird thing about the script though, when it sends two identical posts back to back I get a non-200 HTTP response , hmmmm
+
+> Will sart meme-ifying tonight
+
+> crontab stopped working after a reboot, wonder why ? 
+> never mind I found the bug .. fuck me. 
+  */5 * * * * is very different from * */5 * * * but I somehow missed it for like an hour
+
+===================================================================================
+3/12/17
+
+===================================================================================
+4/12/17
+
+> Start meme'ing : thinking of examples and putting them into files
+> Splitting substitutions into 3 types : 
+   - sentences in quotes "like this"
+   - use of The/the Bla Bla Bla like the Association 
+   - names such as Donald Trump
+   - random substitutions in the sentence if its too short/ no earlier substitutions made
+
+> Added exception handling which I discovered when using public Wi-Fi, SSLexception (interesting)
+
+===================================================================================
+5/12/17
+
+> Implementations of substitutions underway !!!
+> Finished the random substitutions
+
+===================================================================================
+6/12/17
+
+> Moving on to the harder ones
+
+===================================================================================
+7/12/17
+
+> Beatufiying the page
+> Pushing to repo and removing private info ;)
+> testing to make sure nothing breaks
+> Phew finally finished, thank god
 
