@@ -8,10 +8,9 @@ Token-usage learnt from :
 http://www.devils-heaven.com/facebook-access-tokens/
 
 ### Components thrown together to make the bot
-```
+
 - Facebook Graph API 
 - Python + _Python Requests_
 - Regex substitution
 - Taste for memes
 - cron daemon / crontab / cronjobs
-```
