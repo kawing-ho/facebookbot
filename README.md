@@ -1,5 +1,5 @@
 # facebookbot
-> A bot that grabs random news posts and does ~~pseudo~~random substitutions on them, the end result is usually something funny, spicy or edgy :hocho:
+> A bot that grabs random news posts and does ~~pseudo~~random substitutions on them, the end result is usually something funny, spicy or edgy :hocho: : https://www.facebook.com/No-Authenticity-Just-Offensivity-151042402320312/
 
 Inspiration drawn from : 
 http://nodotcom.org/python-facebook-tutorial.html
