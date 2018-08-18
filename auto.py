@@ -9,7 +9,7 @@ from datetime import datetime as dt
 '''
 
 #------REMEMBER TO REDACT IT LATER-------
-token = "/*REDACTED*/"
+token = ""
 #----------------------------------------
 
 base = "https://graph.facebook.com/v2.11/"
@@ -116,7 +116,7 @@ while(1):
       r = None
       r = requests.get(getPost)
    except Exception as e: print str(e)
-   if(r is None or r.status_code != 200): sys.exit("Error in retrieving seed post")
+   if(r is None or r.status_code != 200): sys.exit("Error in retrieving seed post\n"+r.text)
    else:
       response = json.loads(r.content)
       data = response["data"][random.randint(0,4)]  #pick random post out of top 5

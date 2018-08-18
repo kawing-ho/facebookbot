@@ -10,3 +10,10 @@ import requests
 r = requests.get("https://graph.facebook.com/1933964396922258")
 r.text
 
+
+------------------------------
+What to do when token expires: 
+
+Go to Graph Explorer API -> get the short-lived token EAA - ZZ
+then go to Dashboard to get CLient ID + Secret 
+Then using the following URL in notes you can exchange for a longer access-token 
