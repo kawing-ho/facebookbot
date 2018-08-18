@@ -1,5 +1,5 @@
 # facebookbot
-My summer project: A simple and lowkey annoying Facebook bot 
+> A bot that grabs random news posts and does ~~pseudo~~random substitutions on them, the end result is usually something funny, spicy or edgy :hocho: : https://www.facebook.com/No-Authenticity-Just-Offensivity-151042402320312/
 
 Inspiration drawn from : 
 http://nodotcom.org/python-facebook-tutorial.html
@@ -7,4 +7,10 @@ http://nodotcom.org/python-facebook-tutorial.html
 Token-usage learnt from :
 http://www.devils-heaven.com/facebook-access-tokens/
 
+### Components thrown together to make the bot
 
+- Facebook Graph API 
+- Python + _Python Requests_
+- Regex substitution
+- Taste for memes
+- cron daemon / crontab / cronjobs
