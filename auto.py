@@ -11,6 +11,7 @@ from datetime import datetime as dt
 #------REMEMBER TO REDACT IT LATER-------
 token = ""
 #----------------------------------------
+# Debug : https://stackoverflow.com/a/28418469
 
 base = "https://graph.facebook.com/v2.11/"
 meBase = "https://graph.facebook.com/v2.11/me/feed"
@@ -145,4 +146,5 @@ payload = meBase + "?message=" + alter + "&access_token=" + token
 #Comment out this part for debugging
 response = requests.post(payload)
 if response.status_code != 200: print "Posting failed %d" % response.status_code
+print response.text
 
