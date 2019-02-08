@@ -11,7 +11,7 @@ from datetime import datetime as dt
 '''
 
 #------REMEMBER TO REDACT IT LATER-------
-token = "EAAHdZB6olyacBAGuS9vZCpeZCfOczWCqgyf6rMxfRemCbuSQo3XxgcTzAtbUFQxytZCAwcFv7Ug9S0IgQqGZBpa4U6krACQwRDkmueMD9FFrFUhQkTk3NA8PbOQ9XovDKQTimswcRvfqHd2KhF9LZCoSgcMoRfqwteB0iS24xhRwZDZD"
+token = ""
 #----------------------------------------
 # Debug : https://stackoverflow.com/a/28418469
 
@@ -19,8 +19,9 @@ base = "https://graph.facebook.com/v2.11/"
 meBase = "https://graph.facebook.com/v2.11/me/feed"
 path = os.path.dirname(os.path.abspath(__file__))   #cron cant use relative pathing
 
-#Dictionary of news pages (expand if necessary)
-source = {110032161104:"Daily Telegraph",
+# Dictionary of news pages (expand if necessary)
+source = {
+          110032161104:"Daily Telegraph",
           5550296508:"CNN",
           228735667216:"BBC",
           5281959998:"New York Times",
@@ -28,9 +29,13 @@ source = {110032161104:"Daily Telegraph",
           6250307292:"The Washington Post",
           15704546335:"Fox News",
           18468761129:"HuffPost",
+
           155869377766434:"NBC",
           47298465905:"MalaysiaKini",
-	  104598631263:"The Sydney Morning Herald"
+          129011692114:"The Straits Times Singapore",
+          11450527254:"The Star Online",
+
+          104598631263:"The Sydney Morning Herald"
          }
 
 def checkHistory(id):
@@ -41,7 +46,7 @@ def checkHistory(id):
 def alterMessage(message):
    success = 0
 
-   #=====find/replace names=====
+   # =====find/replace names=====
    with open(os.path.join(path,"names.txt"),'r') as f:
       names = f.readlines()
    names = [x.rstrip() for x in names]
@@ -54,7 +59,7 @@ def alterMessage(message):
       randomName = random.choice(names)     
       message = message.replace(n,randomName)
 
-   #=====find/replace special=====
+   # =====find/replace special=====
    with open(os.path.join(path,"special.txt"),'r') as f:
       special = f.readlines()
    special = [x.rstrip() for x in special]
@@ -67,7 +72,7 @@ def alterMessage(message):
       message = message.replace(s,randomSpecial)
    
 
-   #=====find/replace quotes/sentences=====
+   # =====find/replace quotes/sentences=====
    with open(os.path.join(path,"spoken.txt"),'r') as f:
       spoken = f.readlines()
    spoken = [x.rstrip() for x in spoken]
@@ -79,7 +84,7 @@ def alterMessage(message):
       message = message.replace(q,"\""+randomQuote+"\"")
 
 
-   #=====random substitution if others were unsuccessful=====
+   # =====random substitution if others were unsuccessful=====
    if(success == 0):
       
       with open(os.path.join(path,"random.txt"),'r') as f:
@@ -87,20 +92,19 @@ def alterMessage(message):
       randomList = [x.rstrip() for x in randomList]
       randomWord = random.choice(randomList)
 
-      #split message by space/punctutation
-      #words = re.findall(r"[\w']+|[^\w\s]",message, re.UNICODE)
+      # split message by space/punctutation
       words = re.findall(r"[\w']+|[^\w\s]",message, re.UNICODE)
 
-      #find a random word to replace
+      # find a random word to replace
       while(1):
          target = random.choice(words)
          if(re.match("^[a-zA-Z]+$",target)): 
             break
 
-      #reconstruct message
+      # reconstruct message
       message = re.sub(r'\b'+target+r'\b',randomWord,message)
 
-      #2nd substitution for longer messages
+      # 2nd substitution for longer messages
       if(len(words) > 40):
          randomWord = random.choice(randomList)
          while(1):
@@ -108,17 +112,16 @@ def alterMessage(message):
             if(re.match("^[a-zA-Z]+$",target)): 
                break
 
-         #reconstruct message
+         # reconstruct message
          message = re.sub(r'\b'+target+r'\b',randomWord,message)
       
    return message
 
 while(1):
-   #Pick a random news source
+   # Pick a random news source
    chosen = random.choice(list(source.keys()))
-   chosen = 5281959998  # delet this later
 
-   #Get the most recent post (id and message)
+   # Get the most recent post (id and message)
    getPost = base + str(chosen) + "/feed?limit=5" + "&access_token=" + token
    try:
       r = None
@@ -127,41 +130,38 @@ while(1):
    if(r is None or r.status_code != 200): sys.exit("Error in retrieving seed post\n"+r.text)
    else:
       response = json.loads(r.content)
-      data = response["data"][4]  #pick random post out of top 5
-      #data = response["data"][random.randint(0,4)]  #pick random post out of top 5
+      data = response["data"][random.randint(0,4)]  # pick random post out of top 5
       postID = data["id"]
       if(checkHistory(postID) and 'message' in data.keys()):
 
-         # DELET THIS
-         #with open(os.path.join(path,"history.txt"),'a') as f: f.write(postID+"\n")
+         # comment this for debugging 
+         with open(os.path.join(path,"history.txt"),'a') as f: f.write(postID+"\n")
 
-         print(data["message"])
-         postMessage = data["message"].encode('utf-8')  #crucial step to avoid unicode issues
-         print(postMessage)
+         # replace quotes so that we can find special strings to replace on
+         postMessage = data["message"]
+         postMessage = postMessage.replace(u'\u201c','\"')
+         postMessage = postMessage.replace(u'\u201d','\"')
+         postMessage = postMessage.replace(u'\u2019','\'')
 
-         postMessage = postMessage.replace("\xe2\x80\x9c",'\"')
-         postMessage = postMessage.replace("\\xe2\\x80\\x9d",'\"')
-         postMessage = postMessage.replace("\\xe2\\x80\\x99",b'\'')
-
+         #postMessage = postMessage.encode('utf-8')  #crucial step to avoid unicode issues
          break
 
 sourceURL = "https://facebook.com/"+str(postID)
-print("==========================" + str(dt.now()) + "===========================")
-print("Source:",sourceURL,"("+source[chosen]+")\n")
-print("Original Message:\n",postMessage)
-alter = alterMessage(postMessage)   #alter the message
-print("``````````````````````````````````````````````````````````````````````````")
-print("New Message:\n",alter)
+sourceString = "Source [{}]:\n{}".format(source[chosen], sourceURL)
+logtime = str(dt.now().strftime("%A %I:%M %p (%d/%m)")) 
+print("========================== {} ===========================".format(logtime))
+print(sourceString,"\n")
+print("Original Message:\n{}".format(postMessage))
+alter = alterMessage(postMessage)   # alter the message
+alter += "\n\n\n"
+alter += sourceString               # add in source string
+print("``````````````````````````````````````````````````````````````````````````````")
+print("New Message:\n{}".format(alter))
 
-#add source to the message
-alter = alter + "\n\nSource:" + sourceURL
+payload = meBase + "?message=" + urllib.parse.quote(alter) + "&access_token=" + token
 
-#Post the message
-print(alter)
-alter = urllib.parse.quote(alter)
-payload = meBase + "?message=" + alter + "&access_token=" + token
-
-#Comment out this part for debugging
+# comment out this part for debugging
+#==================================================================================
 response = requests.post(payload)
 if response.status_code != 200: print("Posting failed %d") % response.status_code
-
+#==================================================================================
